@@ -4,20 +4,23 @@ const getPokemonByApi = async (id) => {
 
     const response = (await axios(`https://pokeapi.co/api/v2/pokemon/${id}`))
     const { id: pokemonId, name, sprites, stats, weight, height } = response.data;
+    const oficialArtWork = sprites.other['official-artwork'].front_default; 
     const filterStats = stats.map((pokemon) => ({
         stat: pokemon.base_stat,
         name: pokemon.stat.name,
-        hp: pokemon.stat.name === 'hp', //? pokemon.base_stat : null,
-        attack: pokemon.stat.name === 'attack', //? pokemon.base_stat : null,
-        defense: pokemon.stat.name === 'defense', //? pokemon.base_stat : null,
     }));
+
     console.log(filterStats)
-    const { hp, attack, defense, speed } = filterStats[0];
+    
+    const hp = filterStats.find((stat) => stat.name === 'hp').stat;
+    const attack = filterStats.find((stat) => stat.name === 'attack').stat;
+    const defense = filterStats.find((stat) => stat.name === 'defense').stat;
+    const speed = filterStats.find((stat) => stat.name === 'speed').stat;
 
     const pokemonFinal = {
         id: pokemonId,
         name,
-        image: sprites.front_default,
+        image: oficialArtWork,
         hp,
         attack,
         defense,
