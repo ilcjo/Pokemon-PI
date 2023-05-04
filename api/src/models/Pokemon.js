@@ -17,7 +17,6 @@ module.exports = (sequelize) => {
    front_default: { //image
         type:DataTypes.STRING,
         allowNull:false,
-        
     },
     life: {
       type: DataTypes.INTEGER,
@@ -40,8 +39,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     type:{
-      type:DataTypes.STRING,
-      allowNull:false, 
+      type:DataTypes.ARRAY(DataTypes.STRING)
     },
     weight: {
       type: DataTypes.INTEGER,

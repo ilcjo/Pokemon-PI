@@ -1,0 +1,43 @@
+.nav-list {
+    background: white;
+    box-shadow: 0px 0px 4px;
+    padding: 15px 0px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-item {
+    list-style: none;
+    margin-right: 1%;
+  }
+  
+  .nav-item a {
+    text-decoration: none;
+    color: black;
+    transition: 100ms ease-in;
+  }
+  
+  .nav-item a:hover {
+    color: #039d69;
+  }
+  
+  .nav-item {
+    margin-right: auto;
+    margin-left: 2rem;
+  }
+  
+  .btn-primary {
+    font-family: Montserrat, sans-serif;
+    font-size: 1em;
+    background: #6aeeb5;
+    border: none;
+    border-radius: 3px;
+    padding: 15px 15px;
+    cursor: pointer;
+    transition:  200ms ;
+  }
+  
+  .btn-primary:hover {
+    background: #29e6a7;
+  }

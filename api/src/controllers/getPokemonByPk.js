@@ -1,5 +1,4 @@
-
- const { Pokemon } = require ('../db')
+const { Pokemon } = require ('../db')
 
 const getPokemonBypk= async (id)=> {
 
@@ -7,4 +6,4 @@ const getPokemonBypk= async (id)=> {
     return pokemonByPk;
 
 }
- module.exports = getPokemonBypk
+ module.exports = getPokemonBypk 

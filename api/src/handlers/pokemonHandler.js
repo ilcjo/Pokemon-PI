@@ -2,11 +2,7 @@ const {
     allPokemons,
     detailPokemon,
     createPokemon,
-    //findNamePokemons,
-    typesPokemons
 } = require('../controllers/PokemonController')
-
-
 
 //retorna todos los pokemons
 //arreglo de objetos
@@ -60,7 +56,6 @@ const createPokemonHandler = async (req, res) => {
             effect,
             defense,
             speed,
-            type,
             weight,
         } = req.body
 
@@ -72,29 +67,21 @@ const createPokemonHandler = async (req, res) => {
             effect,
             defense,
             speed,
-            type,
             weight);
 
         res.status(200).json(newPokemon);
     } catch (error) {
-        res.status(400).json({ error: error.parent.detail })
+        res.status(400).json(  error.message )
     }
 };
 
 //crear en DB tipos de pokemons si estan vacios
-//  const getTypesPokemons = async (req, res) => {
-//      try {
-//          const typePokemon = await typesPokemons()
-//         res.status(200).json(typePokemon)
-//     } catch (error) {
-//          res.status(400).json({ error: error})
-//      }
-//  };
+ //findAll({include: [{model: Country, attributes: ['id'], through: { attributes: [] }} ]})me o
 
 
 module.exports = {
     getPokemonsHandler,
     detailPokemonHandler,
     createPokemonHandler,
-   // getTypesPokemons,
+ 
 };
