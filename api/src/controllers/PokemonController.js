@@ -5,14 +5,16 @@ const getPokemonByApi = require('./getPokemonByApi')
 
 //id,magen,tipo,nombre
 const allPokemons = async () => {
-    const dataApi = (await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40')).data.results
-    const filterPokemon = dataApi.map((e) => {
-        return ({
+    const getdataApi = (await axios.get('https://pokeapi.co/api/v2/pokemon?limit=15')).data.results
+    const getPokemondata = await Promise.all(getdataApi.map(async (e) => {
+        const getImagNamePokemon = await axios(e.url);
+        return {
             name: e.name,
-        })
-    })
+            image: getImagNamePokemon.data.sprites.other['official-artwork'].front_default
+        }
+    }))
     const dataDB = await Pokemon.findAll();
-    const allData = [...dataDB, ...filterPokemon];
+    const allData = [...dataDB, ...getPokemondata];
     return allData;
 };
 

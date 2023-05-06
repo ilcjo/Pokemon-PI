@@ -14,7 +14,6 @@ const getPokemonsHandler = async (req, res) => {
     try {
         const { name } = req.query
         const pokemons = await allPokemons();
-        console.log(pokemons)
         if (name) {
             const pokemonName = pokemons.filter((pokemon) =>
         (pokemon.name).toLowerCase() === name.toLowerCase())
@@ -23,8 +22,7 @@ const getPokemonsHandler = async (req, res) => {
         }
         else res.status(200).json(pokemons)
     } catch (error) {
-        console.log(error)
-        res.status(400).json({ error: error.parent.detail })
+        res.status(400).json({ error: error.message })
     }
 };
 
