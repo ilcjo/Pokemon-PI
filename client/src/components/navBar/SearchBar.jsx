@@ -8,27 +8,43 @@ import { getNamePokemons } from '../../Redux/actions/actions'
 
 export default function SearchBar() {
   const dispatch = useDispatch()
-  //const { namePokemons } = useSelector((state) => state)
   const [searchTerms, setSearchTerms] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const { namePokemons } = useSelector((state) => state)
 
-
+  
   const handleSearch = () => {
-    dispatch(getNamePokemons(searchTerms))
-  }
+   if (searchTerms.length > 0) {
+      setLoading(true)
+      setError(null)
+      dispatch(getNamePokemons(searchTerms))
+        .then(() => setLoading(false))
+        .catch((err) => {
+          setLoading(false)
+        
+        })
+    }
 
-  // useEffect(() => {
-  //   dispatch(getNamePokemons(searchTerms))
-  // }, [searchTerms, dispatch]
-  // )
+  }
+  useEffect(() => {
+    if (namePokemons.length > 0 || loading) {
+      setSearchTerms('')
+    }
+  }, [namePokemons, loading])
+
   return (
     <div>
+    {error && <span>Error: {error}</span>}
       <input type='text'
         placeholder='Buscar pokemon por Nombre'
         value={searchTerms}
-        onChange={(event)=> setSearchTerms(event.target.value)}
+        onChange={(event) => setSearchTerms(event.target.value)}
         className="input">
       </input>
       <button onClick={handleSearch}>Search</button>
+      {loading && <h1>Loading...</h1>}
+      
     </div>
   )
 }

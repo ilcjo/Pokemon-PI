@@ -10,7 +10,6 @@ const getPokemonByApi = async (id) => {
         name: pokemon.stat.name,
     }));
 
-    console.log(filterStats)
     
     const hp = filterStats.find((stat) => stat.name === 'hp').stat;
     const attack = filterStats.find((stat) => stat.name === 'attack').stat;

@@ -22,7 +22,9 @@ const getPokemonsHandler = async (req, res) => {
         }
         else res.status(200).json(pokemons)
     } catch (error) {
+        console.error(error);
         res.status(400).json({ error: error.message })
+    
     }
 };
 

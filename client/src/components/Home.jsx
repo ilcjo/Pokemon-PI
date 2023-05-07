@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { getAllPokemons } from '../Redux/actions/actions';
 import SearchBar from './navBar/SearchBar'
 import Cards from './Cards'
 import './navBar/NavBar.css'
-//import { useSelector } from 'react-redux'
+
 
 
 export default function Card() {
   const dispatch = useDispatch();
-  //const { namePokemons } = useSelector((state) => state)
-
+  
     useEffect(() => {
       dispatch(getAllPokemons())
     })
