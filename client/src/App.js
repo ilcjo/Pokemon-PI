@@ -16,7 +16,7 @@ const  App = () => {
         {/* <Route path='/' element={<Login/>} ></Route> */}
         <Route path= '/home' element={<Home/>}></Route>
         <Route path='/create' element={<Create/>} ></Route>
-        <Route path='/details' element={<Details/>}></Route>
+        <Route path='/details/:id' element={<Details key={Math.random()} />}></Route>
       </Routes>
       <Footer/>
       </div>

@@ -19,3 +19,5 @@ export const RESET_FILTER= 'RESET_FILTER'
 export const CREATE_POKEMON = 'CREATE_POKEMON'
 //borrar carta
 export const DELET_POKEMON = 'DELET_POKEMON '
+// get pokemons detail por id 
+export const GET_DETAIL_POKEMON = 'GET_DETAIL_POKEMON'

@@ -39,7 +39,7 @@ const detailPokemonHandler = async (req, res) => {
         res.status(200).json(getdetail);
     } catch (error) {
         console.log(error)
-        res.status(400).json({ error: error.parent.detail })
+        res.status(400).json({ error: error.message })
     }
 
 };

@@ -12,9 +12,6 @@ export default function NavBar() {
                 <Link to="/create" className="nav-item">
                     <button className="btn-primary">Create Pokemon</button>
                 </Link>
-                <Link to="/details" className="nav-item">
-                    <button className="btn-primary">Details</button>
-                </Link>
                 <button className="btn-primary">LogOut</button>
 
             </nav>
