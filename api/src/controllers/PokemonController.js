@@ -6,27 +6,90 @@ const getPokemonByApi = require('./getPokemonByApi')
 //id,magen,tipo,nombre
 
 const allPokemons = async () => {
-    const getdataApi = (await axios.get('https://pokeapi.co/api/v2/pokemon?limit=12&offset=24')).data.results
-    const getPokemondata = await Promise.all(getdataApi.map(async (e) => {
-        const getIntoUrl = await axios(e.url);
-        const types = getIntoUrl.data.types.map((type)=> type.type.name).join(', ')
-        const getIntoStats = getIntoUrl.data.stats.map((data)=> ({
+    const getdataApi = (await axios.get('https://pokeapi.co/api/v2/pokemon?limit=24&offset=24')).data.results
+    const promises = [];
+    for(let data of getdataApi) {
+        promises.push(axios(data.url))
+    }
+    console.log("holi2")
+    let values = []
+    for (let promise of promises){
+        const value = await promise
+        console.log(value)
+        values.push(value)
+
+    }
+    const pokemosAPI = []
+    for(results of values){
+        // const getIntoUrl = await axios(data.url);
+        const types = results.data.types.map((type)=> type.type.name).join(', ')
+        const getIntoStats = results.data.stats.map((data)=> ({
             stat: data.base_stat,
             name: data.stat.name}) );
          const attack = getIntoStats.find((value) => value.name === 'attack' ).stat;
-        return {
-            id: getIntoUrl.data.id,
-            name: e.name,
-            image: getIntoUrl.data.sprites.other['official-artwork'].front_default,
+        pokemosAPI.push({
+            id: results.data.id,
+            name: results.data.name,
+            image: results.data.sprites.other['official-artwork'].front_default,
             attack: attack,
             type: types
            // image: getImagNamePokemon.data.sprites.front_default
-        }
-    }))
+        }) 
+    }
+    // const results = await Promise.all(promises)
+    console.log("holi")
     const dataDB = await Pokemon.findAll();
-    const allData = [...dataDB, ...getPokemondata];
+    console.log(dataDB)
+    const allData = [...dataDB, ...pokemosAPI];
     return allData;
 };
+
+  
+
+const detailPokemon = async (id, source) => {
+    const pokemon = source === "API"
+        ? await getPokemonByApi(id)
+        : await getPokemonBypk(id)
+    return pokemon
+
+};
+
+
+const createPokemon = async (name,
+    image,
+    life,
+    attack,
+    effect,
+    defense,
+    speed,
+    weight,
+    type
+) => {
+
+    const newPokemon = Pokemon.create({
+        name,
+        image,
+        life,
+        attack,
+        effect,
+        defense,
+        speed,
+        weight,
+        type
+    });
+    
+    return newPokemon;
+
+};
+
+module.exports = {
+    allPokemons,
+    detailPokemon,
+    createPokemon,
+   // getNamePokemon
+}
+
+
 // const allPokemons = async () => {
 //     const getdataApi = (await axios.get('https://pokeapi.co/api/v2/pokemon?limit=24')).data.results;
   
@@ -50,43 +113,3 @@ const allPokemons = async () => {
 //     const allData = [...dataDB, ...result];
 //     return allData;
 //   };
-  
-
-const detailPokemon = async (id, source) => {
-    const pokemon = source === "API"
-        ? await getPokemonByApi(id)
-        : await getPokemonBypk(id)
-    return pokemon
-
-};
-
-const createPokemon = async (name,
-    front_default,
-    life,
-    attack,
-    effect,
-    defense,
-    speed,
-    weight,
-) => {
-
-    const newPokemon = Pokemon.create({
-        name,
-        front_default,
-        life,
-        attack,
-        effect,
-        defense,
-        speed,
-        weight,
-    });
-    // await newPokemon.addTypeId(typeId)
-    return newPokemon
-
-};
-
-module.exports = {
-    allPokemons,
-    detailPokemon,
-    createPokemon,
-}

@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
-   front_default: { //image
+   image: { //image
         type:DataTypes.STRING,
         allowNull:false,
     },

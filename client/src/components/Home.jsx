@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAllPokemons } from '../Redux/actions/actions';
 import SearchBar from './navBar/SearchBar'
 import Cards from './Cards'
@@ -9,11 +9,12 @@ import './Home.css'
 
 export default function Card() {
   const dispatch = useDispatch();
+  const {chargePokemons} = useSelector((state) => state)
 
 
   useEffect(() => {
-    dispatch(getAllPokemons())
-  }, [dispatch])
+    chargePokemons && dispatch(getAllPokemons())
+  }, [])
 
 
   return (

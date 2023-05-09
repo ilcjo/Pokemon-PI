@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Card from './Card'
 import { useDispatch, useSelector } from 'react-redux'
 import Paginate from './navBar/Paginate'
@@ -9,24 +9,18 @@ export default function Cards() {
   const dispatch = useDispatch()
   const { allPokemons } = useSelector((state) => state)
   const { numPage } = useSelector((state) => state)
-  const { namePokemons } = useSelector((state) => state)
 
 
+  //codicion para que entre o el estado global de name o all
 
-  console.log('namePokemons:', namePokemons)
-  //condicion para que entre o el estado global de name o all
-  const pokemons = namePokemons.length > 0 ? namePokemons : allPokemons
 
-  console.log('constPokemons:', pokemons)
   // Define estado local para la página actual
   let begining = (numPage - 1) * 12;
   let end = numPage * 12;
-
   // Cálculo de la cantidad de páginas
   let amountPage = Math.floor(allPokemons.length / 12)
-
   // Cálculo del rango de pokemons a mostrar en la página actual ya sea name o all
-  const fetchPokemons = pokemons.slice(begining, end)
+  const fetchPokemons = allPokemons.slice(begining, end)
 
   // Función para actualizar la página actual cuando se hace clic en un número de la paginación
 
@@ -57,7 +51,7 @@ export default function Cards() {
   const handlerReset = () => {
     dispatch(resetAll())
   }
-
+  useEffect(() => { console.log(allPokemons) }, [allPokemons])
   return (
     <>
       <div>
@@ -65,55 +59,55 @@ export default function Cards() {
           <input type='checkbox' value='fire' onChange={handlerType} /> Bug
         </label>
         <label>
-          <input type='checkbox' value='Dark' onChange={handlerType} /> Dark
+          <input type='checkbox' value='dark' onChange={handlerType} /> Dark
         </label>
         <label>
-          <input type='checkbox' value='Dragon' onChange={handlerType} /> Dragon
+          <input type='checkbox' value='dragon' onChange={handlerType} /> Dragon
         </label>
         <label>
-          <input type='checkbox' value='Electric' onChange={handlerType} /> Electric
+          <input type='checkbox' value='electric' onChange={handlerType} /> Electric
         </label>
         <label>
-          <input type='checkbox' value='Fairy' onChange={handlerType} /> Fairy
+          <input type='checkbox' value='fairy' onChange={handlerType} /> Fairy
         </label>
         <label>
-          <input type='checkbox' value='Fighting' onChange={handlerType} /> Fighting
+          <input type='checkbox' value='fighting' onChange={handlerType} /> Fighting
         </label>
         <label>
-          <input type='checkbox' value='Fire' onChange={handlerType} /> Fire
+          <input type='checkbox' value='fire' onChange={handlerType} /> Fire
         </label>
         <label>
-          <input type='checkbox' value='Flying' onChange={handlerType} /> Flying
+          <input type='checkbox' value='flying' onChange={handlerType} /> Flying
         </label>
         <label>
-          <input type='checkbox' value='Ghost' onChange={handlerType} /> Ghost
+          <input type='checkbox' value='ghost' onChange={handlerType} /> Ghost
         </label>
         <label>
-          <input type='checkbox' value='Grass' onChange={handlerType} /> Grass
+          <input type='checkbox' value='grass' onChange={handlerType} /> Grass
         </label>
         <label>
-          <input type='checkbox' value='Ground' onChange={handlerType} /> Ground
+          <input type='checkbox' value='ground' onChange={handlerType} /> Ground
         </label>
         <label>
-          <input type='checkbox' value='Ice' onChange={handlerType} /> Ice
+          <input type='checkbox' value='ice' onChange={handlerType} /> Ice
         </label>
         <label>
-          <input type='checkbox' value='Normal' onChange={handlerType} /> Normal
+          <input type='checkbox' value='normal' onChange={handlerType} /> Normal
         </label>
         <label>
-          <input type='checkbox' value='Poison' onChange={handlerType} /> Poison
+          <input type='checkbox' value='poison' onChange={handlerType} /> Poison
         </label>
         <label>
-          <input type='checkbox' value='Psychic' onChange={handlerType} /> Psychic
+          <input type='checkbox' value='psychic' onChange={handlerType} /> Psychic
         </label>
         <label>
-          <input type='checkbox' value='Rock' onChange={handlerType} /> Rock
+          <input type='checkbox' value='rock' onChange={handlerType} /> Rock
         </label>
         <label>
-          <input type='checkbox' value='Steel' onChange={handlerType} /> Steel
+          <input type='checkbox' value='steel' onChange={handlerType} /> Steel
         </label>
         <label>
-          <input type='checkbox' value='Water' onChange={handlerType} /> Water
+          <input type='checkbox' value='water' onChange={handlerType} /> Water
         </label>
 
       </div>

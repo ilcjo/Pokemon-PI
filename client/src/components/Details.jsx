@@ -19,8 +19,14 @@ export default function Details() {
       <h2>{pokemon.name}</h2>
       <img src={pokemon.image} alt={pokemon.name} ></img>
       <h3>Tipo:</h3>
-      <span>{pokemon.types}</span>
+      <span>{pokemon.type}</span>
+      <h3> HP:</h3>
+      <span>{pokemon.hp}</span>
       <h3> Ataque:</h3>
+      <span>{pokemon.attack}</span>
+
+   
+    <p></p>
 
     </div>
   )

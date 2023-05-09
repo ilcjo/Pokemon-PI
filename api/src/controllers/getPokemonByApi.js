@@ -3,8 +3,9 @@ const axios = require('axios');
 const getPokemonByApi = async (id) => {
 
     const response = (await axios(`https://pokeapi.co/api/v2/pokemon/${id}`))
-    const { id: pokemonId, name, sprites, stats, weight, height } = response.data;
-    const oficialArtWork = sprites.other['official-artwork'].front_default; 
+    const { id: pokemonId, name, sprites, stats, weight, height, types} = response.data;
+    const oficialArtWork = sprites.other['official-artwork'].front_default;
+    const type = types.map((type)=> type.type.name).join(', ') 
     const filterStats = stats.map((pokemon) => ({
         stat: pokemon.base_stat,
         name: pokemon.stat.name,
@@ -26,6 +27,8 @@ const getPokemonByApi = async (id) => {
         speed,
         weight,
         height,
+        type
+       
     };
     return pokemonFinal;
 

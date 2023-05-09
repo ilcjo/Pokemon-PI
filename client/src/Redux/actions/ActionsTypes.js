@@ -1,4 +1,5 @@
 export const GET_ALL_POKEMONS = 'GET_ALL_POKEMONS';
+export const SEARCH_POKEMON_NAME = 'SEARCH_POKEMON_NAME'
 // paginado
 export const NEXT_PAGE = 'NEXT_PAGE'
 export const PREV_PAGE = 'PREV_PAGE'
@@ -21,3 +22,4 @@ export const CREATE_POKEMON = 'CREATE_POKEMON'
 export const DELET_POKEMON = 'DELET_POKEMON '
 // get pokemons detail por id 
 export const GET_DETAIL_POKEMON = 'GET_DETAIL_POKEMON'
+

@@ -2,6 +2,7 @@ const {
     allPokemons,
     detailPokemon,
     createPokemon,
+    //getNamePokemon,
 } = require('../controllers/PokemonController')
 
 //retorna todos los pokemons
@@ -13,16 +14,17 @@ const {
 const getPokemonsHandler = async (req, res) => {
     try {
         const { name } = req.query
+        console.log("holi1")
         const pokemons = await allPokemons();
+        
         if (name) {
             const pokemonName = pokemons.filter((pokemon) =>
         (pokemon.name).toLowerCase() === name.toLowerCase())
-            res.status(200).json(pokemonName)
+        res.status(200).json(pokemonName)
             
-        }
+       }
         else res.status(200).json(pokemons)
     } catch (error) {
-        console.error(error);
         res.status(400).json({ error: error.message })
     
     }
@@ -38,40 +40,53 @@ const detailPokemonHandler = async (req, res) => {
         const getdetail = await detailPokemon(id, source);
         res.status(200).json(getdetail);
     } catch (error) {
-        console.log(error)
         res.status(400).json({ error: error.message })
     }
 
 };
+// const NamePokemon = async (req, res) => {
+//     try {
+//         const {name} = req.query
+//         const theNamePokemon= await getNamePokemon(name);
+//         res.status(200).jason(theNamePokemon)
+//     } catch (error) {
+//         res.status(400).json({error: error.message})
+        
+//     }
 
+
+// }
 //crea pokemons nuevos en DB valiadaciones:-no puede esatr API NI DB nombre -error pokemon ya existe  
 //EXTRA agregar el tiempo que se creo
 const createPokemonHandler = async (req, res) => {
     try {
         const {
             name,
-            front_default,
+            image,
             life,
             attack,
             effect,
             defense,
             speed,
             weight,
+            type
         } = req.body
 
         const newPokemon = await createPokemon(
             name,
-            front_default,
+            image,
             life,
             attack,
             effect,
             defense,
             speed,
-            weight);
+            weight,
+            type );
 
         res.status(200).json(newPokemon);
     } catch (error) {
         res.status(400).json(  error.message )
+        console.log(error.message)
     }
 };
 
@@ -83,5 +98,6 @@ module.exports = {
     getPokemonsHandler,
     detailPokemonHandler,
     createPokemonHandler,
+    //NamePokemon
  
 };
